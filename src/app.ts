@@ -1,21 +1,25 @@
 import Vue from 'vue'
 import Taro from '@tarojs/taro'
 import store from './vuex/store';
+import { eventCenter, getCurrentInstance } from '@tarojs/taro'
 import './app.scss'
 
 const App = new Vue({
   store,
-  created(){
+  mounted () {
     if (process.env.TARO_ENV !== 'h5') {
       Taro.getSystemInfo({
         success: function (res) {
           store.dispatch('app/SET_SYSTEM_INFO', res);
         }
       });
-      const boundingRect = Taro.getMenuButtonBoundingClientRect();
+      let boundingRect = Taro.getMenuButtonBoundingClientRect();
       store.dispatch('app/SET_BOUNDING_RECT', boundingRect);
+    } else {
+      store.dispatch('app/SET_BOUNDING_RECT', {
+        left: document.documentElement.offsetWidth
+      });
     }
-
   },
   render(h) {
     // this.$slots.default 是将要会渲染的页面

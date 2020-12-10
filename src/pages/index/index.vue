@@ -2,22 +2,22 @@
   <view class="header" :style="headerWidthStyle">
     <view  class="nosign">签到</view>
     <view class="searchBox">
-      <at-input placeholder='搜索'></at-input>
+      <AtIcon class="icon" value='search' size='20' color='#BEBEBE'></AtIcon>
+      <view class="searchPlaceholder">搜索</view>
     </view>
   </view>
 </template>
 
 <script>
 // 按需引入, 更小的应用体积
-import { AtInput } from 'taro-ui-vue'
+import { AtInput, AtIcon } from 'taro-ui-vue'
 import { mapState } from "vuex";
-import "taro-ui-vue/dist/style/components/button.scss"
-import "taro-ui-vue/dist/style/components/toast.scss"
-import "taro-ui-vue/dist/style/components/noticebar.scss"
+import "taro-ui-vue/dist/style/components/icon.scss"
 import './index.scss'
 export default {
   components: {
-    AtInput
+    AtInput,
+    AtIcon
   },
   data () {
     return {
@@ -28,11 +28,10 @@ export default {
   computed: {
     ...mapState("app", ["boundingRect","systemInfo"]),
     headerWidthStyle() {
-      const margin = 24;
+      const padding = 36;
       return {
-        width: (this.boundingRect.left - margin) + 'px',
-        height: (this.boundingRect.bottom + this.boundingRect.top - this.systemInfo.statusBarHeight) + 'px',
-        marginLeft: '12px'
+        width: this.boundingRect.left + 'px',
+        height: (this.boundingRect.bottom + this.boundingRect.top - this.systemInfo.statusBarHeight) + 'px'
       };
     }
   },

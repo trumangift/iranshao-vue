@@ -2,15 +2,21 @@ import { SET_SYSTEM_INFO, SET_BOUNDING_RECT } from '../mutation-types';
 export default {
     namespaced: true,
     state: {
-        systemInfo: {},
-        boundingRect: {} //右上角胶囊位置信息
+        systemInfo: {
+          statusBarHeight: 20
+        },
+        boundingRect: {
+          bottom: 40,
+          top: 40,
+          left: 0,
+        } //右上角胶囊位置信息
     },
     mutations: {
         [SET_SYSTEM_INFO](state, payload) {
-            state.systemInfo = payload;
+            Object.assign(state.systemInfo, payload);
         },
         [SET_BOUNDING_RECT](state, payload) {
-          state.boundingRect = payload;
+          Object.assign(state.boundingRect, payload);
         }
     },
     actions: {
