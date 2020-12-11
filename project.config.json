@@ -2,7 +2,7 @@
 	"miniprogramRoot": "./dist",
 	"projectname": "iranshao-vue",
 	"description": "",
-	"appid": "touristappid",
+	"appid": "wx7622ab7ebc56f587",
 	"setting": {
 		"urlCheck": true,
 		"es6": false,

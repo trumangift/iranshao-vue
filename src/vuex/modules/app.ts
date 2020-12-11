@@ -3,7 +3,8 @@ export default {
     namespaced: true,
     state: {
         systemInfo: {
-          statusBarHeight: 20
+          statusBarHeight: 0,
+          screenHeight: 0
         },
         boundingRect: {
           bottom: 40,

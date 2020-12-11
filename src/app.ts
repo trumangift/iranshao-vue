@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Taro from '@tarojs/taro'
 import store from './vuex/store';
-import { eventCenter, getCurrentInstance } from '@tarojs/taro'
 import './app.scss'
 
 const App = new Vue({
@@ -17,7 +16,11 @@ const App = new Vue({
       store.dispatch('app/SET_BOUNDING_RECT', boundingRect);
     } else {
       store.dispatch('app/SET_BOUNDING_RECT', {
-        left: document.documentElement.offsetWidth
+        left: document.documentElement.clientWidth
+      });
+      store.dispatch('app/SET_SYSTEM_INFO', {
+        screenHeight: document.documentElement.clientHeight,
+        statusBarHeight: 20,
       });
     }
   },

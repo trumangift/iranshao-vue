@@ -1,3 +1,4 @@
+const path = require('path');
 const config = {
   projectName: 'iranshao-vue',
   date: '2020-12-10',
@@ -59,6 +60,11 @@ const config = {
         }
       }
     }
+  },
+  alias: {
+    '@/components': path.resolve(__dirname, '..', 'src/components'),
+    '@/utils': path.resolve(__dirname, '..', 'src/utils'),
+    '@/pageComponents': path.resolve(__dirname, '..', 'src/pages/components')
   }
 }
 
