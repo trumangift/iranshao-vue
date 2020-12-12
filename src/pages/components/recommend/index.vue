@@ -43,7 +43,7 @@
         this.isLoadingMore = true; // 显示加载中...
         this.queryListByPage(nextPage).then(res => {
               this.list = this.list.concat(res.statuses);
-              // this.isLoadingMore = false;
+              this.isLoadingMore = false;
               // 如果加载成功了，才修改页码
               pageNum = nextPage;
         }).catch(e => {

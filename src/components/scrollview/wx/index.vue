@@ -1,6 +1,6 @@
 <template>
   <view class="iranshao-scroll-view" :style="{height, top: scrollTop}">
-   <view v-if="isRefreshing">
+   <view v-show="isRefreshing">
      <slot name="pullLoadingSlot"></slot>
    </view> 
    <scroll-view class="iranshao-inner-scroll-view" :style="{height: '100%', top: scrollTop}" :scrollY="scrollY"
@@ -13,7 +13,7 @@
         {{item.body}}
       </view>
     </scroll-view> 
-   <view v-if="isLoadingMore" class="iranshao-load-more-wrapper">
+   <view v-show="isLoadingMore" class="iranshao-load-more-wrapper">
      <slot name="loadMoreSlot"></slot>
    </view> 
   </view>  
