@@ -9,6 +9,9 @@ if (process.env.TARO_ENV === 'h5') {
 const httpRequest = typeof Fly === 'function' ? new Fly() : Fly
 const tokenRquest =  typeof Fly === 'function' ? new Fly() : Fly
 
+const redirectToLoginH5 = () => {
+  location.replace(`${BASE_URL}/auth/sso/authorize?client_id=mobile_web&redirect_uri=${location.href}&response_type=code`);
+}
 const getAuth = async () => {
   httpRequest.lock();
   const { code } = await Taro.login();
@@ -27,11 +30,13 @@ httpRequest.config.baseURL = `${BASE_URL}`
 tokenRquest.config.baseURL = `${BASE_URL}`
 
 httpRequest.interceptors.request.use(async request => {
-  let accessToken = Taro.getStorageSync('accessToken')
-  if(!accessToken) {
-    getAuth()
+  if (process.env.TARO_ENV === 'weapp') {
+    let accessToken = Taro.getStorageSync('accessToken')
+    if(!accessToken) {
+      getAuth()
+    }
+    request.headers["X-AUTH-TOKEN"] = Taro.getStorageSync('accessToken')
   }
-  request.headers["X-AUTH-TOKEN"] = Taro.getStorageSync('accessToken')
   return request
 })
 httpRequest.interceptors.response.use(
@@ -46,13 +51,23 @@ httpRequest.interceptors.response.use(
       }
       if (status === 401 || status === 403) {
         if(status === 401) {
-          Taro.reLaunch({
-            url: '/pages/login/login'
-          })
-        } else {
-          getAuth()
-          err.request.headers['X-AUTH-TOKEN'] = Taro.getStorageSync('accessToken')
-          return await httpRequest.request(err.request)
+          if (process.env.TARO_ENV === 'weapp') {
+            Taro.reLaunch({
+              url: '/pages/login/login'
+            })
+          }
+          if (process.env.TARO_ENV === 'h5') {
+            redirectToLoginH5();
+          }
+        } else { // 403
+          if (process.env.TARO_ENV === 'weapp') {
+            getAuth()
+            err.request.headers['X-AUTH-TOKEN'] = Taro.getStorageSync('accessToken')
+            return await httpRequest.request(err.request)
+          }
+          if (process.env.TARO_ENV === 'h5') {
+            redirectToLoginH5();
+          }
         }
       } else if(status === 500) {
         throw new Error(err.response.data.errors[0].message)

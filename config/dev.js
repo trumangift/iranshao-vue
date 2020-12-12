@@ -3,7 +3,7 @@ module.exports = {
     NODE_ENV: '"development"'
   },
   defineConstants: {
-    BASE_URL: JSON.stringify('https://iranshao.com')
+    BASE_URL: JSON.stringify('https://staging.iranshao.com')
   },
   mini: {},
   h5: {

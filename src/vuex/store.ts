@@ -3,7 +3,7 @@ import Vuex from 'vuex';
 import app from './modules/app';
 import getters from './getter';
 
-import recommendModule from '@/pageComponents/recommend';
+import recommendModule from '@/pageComponents/recommend/index.module.js';
 
 Vue.use(Vuex);
 

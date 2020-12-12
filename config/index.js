@@ -44,6 +44,10 @@ const config = {
     }
   },
   h5: {
+    router: {
+      mode: 'browser', // 不可以用hash模式,h5单点登录验证后跳转回来会冲突
+      basename: '/'
+    },
     publicPath: '/',
     staticDirectory: 'static',
     postcss: {

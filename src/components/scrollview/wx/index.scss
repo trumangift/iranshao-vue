@@ -1,0 +1,10 @@
+.iranshao-scroll-view {
+    position: relative;
+    overflow: hidden;
+    .iranshao-load-more-wrapper {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+}

@@ -1,6 +1,6 @@
 <template>
   <view>
-    <view class="index_header container" :style="headerWidthStyle">
+    <view class="index_header container" :style="headerStyle">
       <view  class="nosign">签到</view>
       <view class="searchBox">
         <AtIcon class="icon-search" value='search' size='18' color='#BEBEBE'></AtIcon>
@@ -52,10 +52,10 @@ export default {
   },
   computed: {
     ...mapState("app", ["boundingRect","systemInfo"]),
-    headerWidthStyle() {
+    headerStyle() {
       return {
         width: this.boundingRect.left + 'px',
-        height: (this.boundingRect.bottom + this.boundingRect.top - this.systemInfo.statusBarHeight) + 'px'
+        height: (this.boundingRect.bottom + this.boundingRect.top  - this.systemInfo.statusBarHeight - 2) + 'px' // 2 is the right 2 border height
       };
     }
   },

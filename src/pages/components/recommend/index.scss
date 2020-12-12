@@ -1,4 +1,12 @@
-.scroll-view_H {
-  height: 100%;
-  background-color: red;
+.load-more, .pull-load {
+  text-align: center;
+  font-size: 30px;
+  color: #666;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 0;
+}
+.loading-text {
+  padding-left: 10px;
 }
