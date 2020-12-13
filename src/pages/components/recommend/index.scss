@@ -10,3 +10,46 @@
 .loading-text {
   padding-left: 10px;
 }
+
+.home-page-list {
+  background: #F6F6F6;
+  .not-login-container{
+    height: 100%;
+    padding-top: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    .not-login-img{
+      width: 436px;
+      height: 370px;
+    }
+
+    .tips-text{
+      height:33px;
+      font-size:24px;
+      font-family:PingFangSC-Light,PingFang SC;
+      font-weight:300;
+      color:rgba(82,94,103,1);
+      line-height:33px;
+      margin-bottom: 85px;
+    }
+
+    .login-btn{
+      width:400px;
+      height:80px;
+      line-height:80px;
+      background:rgba(255,80,0,1);
+      box-shadow:0 20px 50px 0 rgba(255,80,0,0.27);
+      border-radius:40px;
+
+      font-size:28px;
+      font-family:PingFangSC-Regular,PingFang SC;
+      font-weight:400;
+      color:rgba(255,255,255,1);
+      letter-spacing:10px;
+      text-align: center;
+    }
+  }
+
+}

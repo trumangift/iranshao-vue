@@ -1,0 +1,46 @@
+.user-card-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  
+    .user-msg {
+      display: flex;
+      align-items: center;
+  
+      .user-msg-detail {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+  
+        .user-name {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+  
+          .nickname{
+            color: #000000;
+            font-size: 30px;
+            font-weight: 500;
+          }
+  
+          .identification {
+            color: #BEBEBE;
+            font-size: 22px;
+          }
+        }
+      }
+  
+      .operation {
+        color: #bebebe;
+      }
+    }
+  
+    .sub-name {
+      color: #BEBEBE;
+      font-size: 22px;
+      margin-right: 24px;
+    }
+  
+  }
+  

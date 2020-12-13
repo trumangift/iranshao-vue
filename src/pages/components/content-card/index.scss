@@ -1,0 +1,19 @@
+.content-card-container {
+    background: #FFFFFF;
+    padding: 24px;
+    margin-bottom: 20px;
+    .diary-cover {
+      width: 100%;
+      height: 100%;
+      border-radius: 8px;
+    }
+    .photo-container {
+      background: #f1f1f1;
+      width: 100%;
+      height: 340px;
+      border-radius: 8px;
+    }
+    .disabled {
+      display: none;
+    }
+  }

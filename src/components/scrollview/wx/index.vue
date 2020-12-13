@@ -1,21 +1,25 @@
 <template>
   <view class="iranshao-scroll-view" :style="{height, top: scrollTop}">
-   <view v-show="isRefreshing">
-     <slot name="pullLoadingSlot"></slot>
-   </view> 
-   <scroll-view class="iranshao-inner-scroll-view" :style="{height: '100%', top: scrollTop}" :scrollY="scrollY"
+   <scroll-view 
+      ref="taro-scrollView"
+      class="iranshao-inner-scroll-view"
+      :style="{height: '100%', top: scrollTop + 'px'}" :scrollY="scrollY"
       @touchMove="onTouchMove"
       @touchStart="onTouchStart"
       @touchEnd="onTouchEnd"
       @scrollToLower="onScrollToLower"
+      @scroll="onScroll"
    >
-      <view :key="index" v-for="(item, index) in list" style="height: 200px;">
-        {{item.body}}
-      </view>
-    </scroll-view> 
-   <view v-show="isLoadingMore" class="iranshao-load-more-wrapper">
-     <slot name="loadMoreSlot"></slot>
-   </view> 
+      <view v-show="scrollTop > 0">
+        <slot name="pullLoadingSlot-pre" v-if="!isRefreshing"></slot>
+        <slot name="pullLoadingSlot-release" v-else></slot>
+      </view> 
+      <slot name="content">
+      </slot>   
+      <view  class="iranshao-load-more-wrapper" v-show="isLoadingMore">
+        <slot name="loadMoreSlot"></slot>
+      </view> 
+   </scroll-view> 
   </view>  
 </template>
 <script>
@@ -27,10 +31,6 @@ export default {
             type: String,
             required: true
         },
-        list: {
-            type: Array,
-            required: true
-        },
         isLoadingMore: {
              type: Boolean,
              required: true
@@ -39,9 +39,10 @@ export default {
     data() {
         return {
             scrollY: true,
-            scrollTop: 0 + 'px',
+            scrollTop: 0,
             isRefreshing: false,
-            startPosition: {}
+            startPosition: {},
+            isDraggable: true,
         }
     },
     created() {
@@ -52,10 +53,20 @@ export default {
         this.$emit('onPullRefresh');
       },
       onTouchStart(e) {
-        this.startPosition = e.touches[0]; 
-        this.scrollY = false;
+        if (this.isDraggable) {
+          this.startPosition = e.touches[0]; 
+          this.scrollY = false;
+        }
+      },
+      onScroll(e) {
+         if (e.detail.scrollTop < 30) {
+           this.isDraggable = true;
+         } else {
+           this.isDraggable = false;
+         }
       },
       onTouchMove(e) {
+        if (this.isDraggable) {
         let move_p = e.touches[0],
             startP = this.startPosition,
             start_x = startP.clientX,
@@ -63,15 +74,15 @@ export default {
             move_x = move_p.clientX,
             move_y = move_p.clientY;
             const offsetY = move_y - start_y;
-
-            if (offsetY > 0) { //下拉刷新
-               this.scrollTop = offsetY + 'px';
+            this.scrollTop = offsetY;
+            if (offsetY > 70) { //下拉刷新
                this.isRefreshing = true;
                this.notifyLoadMore();
             }
+        }
       },
       onTouchEnd(e) {
-        this.scrollTop = 0 + 'px';
+        this.scrollTop = 0;
         this.scrollY = true;
         this.isRefreshing = false;
       },

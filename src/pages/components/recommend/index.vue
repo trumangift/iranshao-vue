@@ -1,14 +1,35 @@
 <template>
   <view>
     <taro-scroll-view  :height="scrollHeight" :list="list" :isLoadingMore="isLoadingMore" @onloadMore="onloadMore" @onPullRefresh="onPullRefresh">
-      <view slot="pullLoadingSlot" class="pull-load">
-         <AtIcon  value='loading' size='18' color='#666'></AtIcon>
-         <text class="loading-text">刷新中...</text>
+      <view slot="pullLoadingSlot-pre" class="pull-load">
+         <AtIcon class="loading-turn" value='loading' size='18' color='#666'></AtIcon>
+         <text class="loading-text">下拉刷新</text>
+      </view>
+      <view slot="pullLoadingSlot-release" class="pull-load">
+         <AtIcon class="loading-turn" value='loading' size='18' color='#666'></AtIcon>
+         <text class="loading-text">释放刷新</text>
       </view>
       <view slot="loadMoreSlot" class="load-more">
-         <AtIcon  value='loading' size='18' color='#666'></AtIcon>
+         <AtIcon class="loading-turn"  value='loading' size='18' color='#666'></AtIcon>
          <text class="loading-text">加载中...</text>
       </view>
+
+
+      <view slot="content">
+        <view className='home-page-list'>
+          <view>
+             <ContentList
+              type='recommend'
+              :list="list.slice(0, 3)"
+            /> 
+            <!-- <RecommendTopics topics={recommendTopics} />
+            <ContentList
+              type='recommend'
+              list={recommendList.slice(3)}
+            /> -->
+          </view>
+        </View>
+      </view>  
     </taro-scroll-view>
   </view>
 </template>
@@ -18,6 +39,7 @@
  import { callApi } from "@/utils";
  import { mapState, mapActions } from "vuex"
  import TaroScrollView from '@/components/scrollview';
+ import ContentList from '../content-list';
  import "taro-ui-vue/dist/style/components/icon.scss"
  import './index.scss'
  let pageNum = 1;
@@ -28,6 +50,7 @@
    components: {
     TaroScrollView,
     AtIcon,
+    ContentList
    },
    data () {
      return {
