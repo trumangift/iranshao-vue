@@ -1,0 +1,66 @@
+// flex layout
+.row {
+    display: flex;
+  }
+  
+.column {
+display: flex;
+flex-direction: column;
+}
+
+.stretch {
+flex: 1;
+}
+
+.center {
+justify-content: center;
+align-items: center;
+}
+
+.main-center {
+justify-content: center;
+}
+
+.main-end {
+justify-content: flex-end;
+}
+
+.align-self-start {
+align-self: flex-start;
+}
+
+.align-self-end {
+align-self: flex-end;
+}
+
+.align-self-center {
+align-self: center;
+}
+
+.cross-start {
+align-items: flex-start;
+}
+
+.cross-center {
+align-items: center;
+}
+
+.cross-end {
+align-items: flex-end;
+}
+
+.cross-stretch {
+align-items: stretch;
+}
+
+.cross-baseLine {
+align-items: baseline;
+}
+
+.space-around {
+justify-content: space-around;
+}
+
+.space-between {
+justify-content: space-between;
+}

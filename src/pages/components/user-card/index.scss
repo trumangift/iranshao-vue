@@ -1,8 +1,4 @@
 .user-card-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-  
     .user-msg {
       display: flex;
       align-items: center;
@@ -12,12 +8,11 @@
         flex-direction: column;
         justify-content: center;
         align-items: flex-start;
-  
         .user-name {
+          height: 64px; 
+          line-height: initial;
           display: flex;
-          justify-content: center;
-          align-items: center;
-  
+   
           .nickname{
             color: #000000;
             font-size: 30px;

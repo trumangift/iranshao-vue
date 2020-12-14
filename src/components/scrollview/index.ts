@@ -4,7 +4,7 @@ let scrollView = null;
 if (process.env.TARO_ENV === 'weapp') {
     scrollView = wxScrollView;
 } else if (process.env.TARO_ENV === 'h5') {
-    scrollView = wxScrollView;
+    scrollView = h5ScrollView;
 } else {
     console.error('scroll view now only support h5 and weapp');
 }

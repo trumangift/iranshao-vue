@@ -1,6 +1,6 @@
 <template>
   <view>
-    <taro-scroll-view  :height="scrollHeight" :list="list" :isLoadingMore="isLoadingMore" @onloadMore="onloadMore" @onPullRefresh="onPullRefresh">
+    <taro-scroll-view  :height="scrollHeight" :list="list"  :loadMore="onloadMore" @onPullRefresh="onPullRefresh">
       <view slot="pullLoadingSlot-pre" class="pull-load">
          <AtIcon class="loading-turn" value='loading' size='18' color='#666'></AtIcon>
          <text class="loading-text">下拉刷新</text>
@@ -16,11 +16,11 @@
 
 
       <view slot="content">
-        <view className='home-page-list'>
+        <view class='home-page-list'>
           <view>
              <ContentList
               type='recommend'
-              :list="list.slice(0, 3)"
+              :list="list"
             /> 
             <!-- <RecommendTopics topics={recommendTopics} />
             <ContentList
@@ -42,7 +42,7 @@
  import ContentList from '../content-list';
  import "taro-ui-vue/dist/style/components/icon.scss"
  import './index.scss'
- let pageNum = 1;
+import { reject } from 'lodash';
  export default {
    computed: {
      ...mapState("app", ["systemInfo"])
@@ -55,35 +55,29 @@
    data () {
      return {
        scrollHeight: '',
-       list: [],
-       isLoadingMore: false
+       list: []
      }
    },
    methods: {
       ...mapActions('recommendModule',['queryListByPage']),
-      onloadMore() {
-        const nextPage = pageNum + 1; // no use pageNum++ because of error loading fall back
-        this.isLoadingMore = true; // 显示加载中...
-        this.queryListByPage(nextPage).then(res => {
-              this.list = this.list.concat(res.statuses);
-              this.isLoadingMore = false;
-              // 如果加载成功了，才修改页码
-              pageNum = nextPage;
-        }).catch(e => {
-              this.isLoadingMore = false;
+      onloadMore(pageNum, type) {
+        const nextPage = pageNum;
+        return new Promise((resolve, reject) => {
+            this.queryListByPage(pageNum).then(res => {
+                  if (type === 'init') {
+                    this.list = res.statuses;
+                  } else {
+                    this.list = this.list.concat(res.statuses);
+                  } 
+                  resolve(res); 
+            }).catch(e => {
+                  reject(e); 
+            });
         });
       },
       onPullRefresh() {
-        pageNum = 1;
-        this.queryListByPage(pageNum).then(res => {
-              this.list = res.statuses;
-        });
+        this.onloadMore(1, 'init');
       }
-   },
-   created() {
-     this.queryListByPage(pageNum).then(res => {
-         this.list = this.list.concat(res.statuses);
-     });
    },
    mounted() {
      const query = Taro.createSelectorQuery();
@@ -94,7 +88,7 @@
        const indexHeaderHeight =  res[0] && res[0].height || 60;
        const tabsHeight =  res[1] && res[1].height || 51.5;
        const tabbarHeight =  res[2] && res[2].height || 50;
-       let excludeScrollHeight = indexHeaderHeight + tabsHeight + tabbarHeight  + 24; // 24 is the at-tabs__header padding-top + 1px border
+       let excludeScrollHeight = indexHeaderHeight + tabsHeight + tabbarHeight  + 16; // 24 is the at-tabs__header padding-top + 1px border
        const scrollHeight = this.systemInfo.screenHeight - excludeScrollHeight;
         if (scrollHeight) {
           this.scrollHeight = scrollHeight + 'px'

@@ -6,6 +6,7 @@
 </template>
 <script>
 import ContentCard from '../content-card';
+import './index.scss';
 export default {
     props: {
       type: {

@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Taro from '@tarojs/taro'
 import store from './vuex/store';
+import './style';
 import './app.scss'
 
 const App = new Vue({

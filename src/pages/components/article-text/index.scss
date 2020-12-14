@@ -1,0 +1,42 @@
+.article-text-container {
+    color: #4E4E4E;
+    font-size: 28px;
+    line-height: 36px;
+    letter-spacing: 3px;
+    margin-top: 30px;
+    position: relative;
+  
+    .article-title {
+      font-weight: bold;
+      margin-bottom: 10px;
+      line-height: 40px;
+      letter-spacing: 3px;
+    }
+  
+    .article-body {
+      Text{
+        letter-spacing:3px;
+        line-height:46px;
+      }
+      .h1-body {
+        font-family:DINPro-Bold;
+        font-size: 36px;
+        color: #343434;
+        font-weight:bold;
+      }
+  
+      .body-text {
+        overflow: hidden;
+        color: #262626;
+        font-size: 30px;
+        margin-top: 20px;
+  
+        .full-text{
+          color: #EC6D33;
+          font-weight: 400;
+        }
+      }
+    }
+  
+  }
+  

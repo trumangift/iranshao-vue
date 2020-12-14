@@ -23,6 +23,7 @@
   </view>  
 </template>
 <script>
+let pageNum = 1;
 import './index.scss'
 import { debounce } from 'lodash';
 export default {
@@ -31,9 +32,9 @@ export default {
             type: String,
             required: true
         },
-        isLoadingMore: {
-             type: Boolean,
-             required: true
+        loadMore: {
+             type: Function,
+             required: true,
         }
     },
     data() {
@@ -43,10 +44,17 @@ export default {
             isRefreshing: false,
             startPosition: {},
             isDraggable: true,
+            isLoadingMore: false,
         }
     },
     created() {
       this.notifyLoadMore =  debounce(this.notifyLoadMore, 50);
+      this.isLoadingMore = true;
+      this.loadMore(1, 'init').then(d => {
+        this.isLoadingMore = false;
+      }).catch(e => {
+        this.isLoadingMore = false;
+      });
     },
     methods: {
       notifyLoadMore() {
@@ -89,7 +97,13 @@ export default {
       onScrollToLower(e) {
         // 加载更多
         if (!this.isLoadingMore) {
-           this.$emit('onloadMore');
+           this.isLoadingMore = true; 
+           this.loadMore(pageNum + 1).then(d => {
+             pageNum += 1;
+             this.isLoadingMore = false;
+           }).catch(e => {
+             this.isLoadingMore = false;
+           });
         }
       }
     }       
