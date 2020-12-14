@@ -11,6 +11,7 @@
             <normal-text v-if="action === 'create_race_review'" :text="bodyCopy" :fullTextFlag="fullTextFlag" :detailId="referable_id" type='RaceReview'></normal-text>
             <normal-text v-if="action === 'create_gear_comment'" :text="bodyCopy" :fullTextFlag="fullTextFlag" :detailId="referable_id" type='GearComment'></normal-text>
             <article-text
+            v-if="action === 'create_diary' || action === 'create_article'"
             :h1Body="h1Body"
             :bodyText="bodyText"
             :articleId="referable_id"
@@ -63,7 +64,7 @@ export default {
             if (bodyText.length > 88) {
                bodyText = `${bodyText.substring(0, 120)}`
             }
-            bodyText = `${bodyText} ...`
+            bodyText = bodyText ? `${bodyText} ...` : '';
         }else { // 如果是用户发的动态
             // 如果太长了，截取一部分显示，再显示"全文"
             if (bodyCopy.length > 88) {
