@@ -16,7 +16,7 @@
       </view> 
       <slot name="content">
       </slot>   
-      <view  class="iranshao-load-more-wrapper" v-show="isLoadingMore">
+      <view  class="iranshao-load-more-wrapper row center" v-show="isLoadingMore">
         <slot name="loadMoreSlot"></slot>
       </view> 
    </scroll-view> 
@@ -77,15 +77,17 @@ export default {
         if (this.isDraggable) {
         let move_p = e.touches[0],
             startP = this.startPosition,
-            start_x = startP.clientX,
             start_y = startP.clientY,
-            move_x = move_p.clientX,
             move_y = move_p.clientY;
             const offsetY = move_y - start_y;
-            this.scrollTop = offsetY;
-            if (offsetY > 70) { //下拉刷新
-               this.isRefreshing = true;
-               this.notifyLoadMore();
+            const threadHold = 5; // 降低重绘频率 减少小程序掉帧
+            
+            if ((offsetY - this.scrollTop) >= threadHold) {
+              this.scrollTop = offsetY;
+              if (offsetY > 70) { //下拉刷新
+                this.isRefreshing = true;
+                this.notifyLoadMore();
+              }
             }
         }
       },

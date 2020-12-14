@@ -3,10 +3,10 @@
      <image 
         v-if="loading"
         :src="defaultLoadingImg"
-        @load="loading = false"
         :class="className"
         :style="customStyle"
-    :lazyLoad="true">
+        :mode="mode"
+        :lazyLoad="true">
     </image> 
     <image 
         v-else
@@ -15,7 +15,8 @@
         :style="customStyle"
         @click="click"
         :src="url"
-    :lazyLoad="true">
+        :mode="mode"
+        :lazyLoad="true">
     </image> 
   </view>     
 </template>
@@ -34,14 +35,15 @@ export default {
            default: () => {}
        },
        url: {
-           required: true,
-           type: String,
            default: ''
+       },
+       mode: {
+           default: 'scaleToFill'
        }
     },
     data() {
         return {
-            loading: false,
+            loading: true,
             defaultLoadingImg
         }
     },

@@ -17,6 +17,11 @@
             :articleId="referable_id"
             :type="referable_type"
             ></article-text>
+
+            <view v-if="action === 'create_article' || action === 'create_diary'" class="photo-container">
+                <iran-image :url="item.photo_url" mode="aspectFill" class="cover-image">
+                </iran-image>    
+            </view>
         </view>    
     </view>      
 </template>
@@ -25,6 +30,7 @@ import UserCard from '../user-card';
 import TopicTag from '../topicTag';
 import NormalText from '../normal-text';
 import ArticleText from '../article-text';
+import IranImage from '@/components/image/index.vue'
 import './index.scss';
 export default {
     created() {
@@ -51,7 +57,6 @@ export default {
        } = (this.item || {});
 
         let bodyCopy =  body ? body : ''
-        console.log(body);
         // 截取字符串，body中如果含有<h1></h1>标签，截取出h1标签中的内容h1Body, 截取出h1标签外的内容bodyText
         const h1LastIndex =  bodyCopy.indexOf('</h1>')
         let h1Body = ''
@@ -107,7 +112,8 @@ export default {
         UserCard,
         TopicTag,
         NormalText,
-        ArticleText
+        ArticleText,
+        IranImage
     }
 }
 </script>

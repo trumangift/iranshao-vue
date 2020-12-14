@@ -24,6 +24,7 @@
         color: #343434;
         font-weight:bold;
         line-height: 50px;
+        text-align: justify;
       }
   
       .body-text {
@@ -32,9 +33,11 @@
         font-size: 30px;
         margin-top: 20px;
         line-height: 50px;;
+        text-align: justify;
         .full-text{
           color: #EC6D33;
           font-weight: 400;
+          float: right;
         }
       }
     }

@@ -48,7 +48,6 @@ export default {
             })
         },
         downCallback() {
-            console.log(arguments);
             this.loadMore(1, 'init').then(d => {
                 this.mescroll.endSuccess(d.statuses.length)
             }).catch(e => {

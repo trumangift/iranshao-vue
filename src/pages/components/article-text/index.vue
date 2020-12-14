@@ -10,6 +10,7 @@
 </template>
 <script>
 import './index.scss';
+import Taro from '@tarojs/taro';
 export default {
     props: {
         h1Body: '',
@@ -19,6 +20,7 @@ export default {
     },
     methods: {
         linkToArticleDetail() {
+            const {articleId, type} = this;
             Taro.navigateTo({ url: `/pages/articleDetail/index?id=${articleId}&type=${type}` })
         }
     }
