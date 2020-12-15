@@ -1,16 +1,8 @@
 <template>
-  <view>
-     <image 
-        v-if="loading"
-        :src="defaultLoadingImg"
-        :class="className"
-        :style="customStyle"
-        :mode="mode"
-        :lazyLoad="true">
-    </image> 
+  <view class="iran-image"> 
     <image 
-        v-else
-        @load="loading = false"
+        @load="loaded = true"
+        @error="loaded = false"
         :class="className"
         :style="customStyle"
         @click="click"
@@ -18,6 +10,14 @@
         :mode="mode"
         :lazyLoad="true">
     </image> 
+    <image 
+        v-if="!loaded"
+        :src="defaultLoadingImg"
+        :class="[className, 'defaultLoadingImg']"
+        :style="customStyle"
+        :mode="mode"
+        >
+    </image>
   </view>     
 </template>
 <script>
@@ -43,7 +43,7 @@ export default {
     },
     data() {
         return {
-            loading: true,
+            loaded: false,
             defaultLoadingImg
         }
     },

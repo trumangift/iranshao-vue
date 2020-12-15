@@ -19,9 +19,11 @@
             ></article-text>
 
             <view v-if="action === 'create_article' || action === 'create_diary'" class="photo-container">
-                <iran-image :url="item.photo_url" mode="aspectFill" class="cover-image">
+                <iran-image :url="item.photo_url" mode="aspectFill" className="cover-image">
                 </iran-image>    
             </view>
+            <manifesto v-if="action === 'create_participation'" :text="bodyCopy" participationId={referable_id}></manifesto>
+            <gallery :photos="photos"></gallery>
         </view>    
     </view>      
 </template>
@@ -30,7 +32,9 @@ import UserCard from '../user-card';
 import TopicTag from '../topicTag';
 import NormalText from '../normal-text';
 import ArticleText from '../article-text';
-import IranImage from '@/components/image/index.vue'
+import IranImage from '@/components/image/index.vue';
+import Manifesto from '@/pageComponents/manifesto';
+import gallery from '@/pageComponents/gallery';
 import './index.scss';
 export default {
     created() {
@@ -85,6 +89,7 @@ export default {
         this.h1Body = h1Body;
         this.bodyText = bodyText;
         this.referable_type = referable_type;
+        this.photos = photos;
     },
     props: {
         item: {
@@ -105,7 +110,8 @@ export default {
            referable_id: '',
            h1Body: '',
            bodyText: '',
-           referable_type: ''
+           referable_type: '',
+           photos: []
         }
     },
     components: {
@@ -113,7 +119,9 @@ export default {
         TopicTag,
         NormalText,
         ArticleText,
-        IranImage
+        IranImage,
+        Manifesto,
+        gallery
     }
 }
 </script>
