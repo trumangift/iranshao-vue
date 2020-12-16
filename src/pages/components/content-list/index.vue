@@ -1,7 +1,9 @@
 <template>
    <view class="content-list">
-    <content-card :item="item" :type="type" :key="index" v-for="(item, index) in list">
-    </content-card>    
+     <template  v-for="(item, index) in list">
+        <content-card  v-if="item" :item="item" :type="type" :key="index">
+        </content-card>    
+     </template>
    </view>    
 </template>
 <script>

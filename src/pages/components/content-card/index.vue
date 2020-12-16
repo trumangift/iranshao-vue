@@ -23,7 +23,7 @@
                 </iran-image>    
             </view>
             <manifesto v-if="action === 'create_participation'" :text="bodyCopy" participationId={referable_id}></manifesto>
-            <gallery :photos="photos"></gallery>
+            <gallery v-if="item.photos.length > 0" :photos="item.photos || []"></gallery>
         </view>    
     </view>      
 </template>
@@ -89,7 +89,6 @@ export default {
         this.h1Body = h1Body;
         this.bodyText = bodyText;
         this.referable_type = referable_type;
-        this.photos = photos;
     },
     props: {
         item: {
@@ -110,8 +109,7 @@ export default {
            referable_id: '',
            h1Body: '',
            bodyText: '',
-           referable_type: '',
-           photos: []
+           referable_type: ''
         }
     },
     components: {

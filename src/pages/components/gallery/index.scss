@@ -1,0 +1,11 @@
+.gallery {
+    margin: 20px 0;
+    .gallery-item {
+        display: inline-block;
+        border-radius: 10px;
+        border: 1px solid #eee;
+    }
+    .iran-image:not(:first-child) {
+        margin-left: 20px; // gap
+    }
+}
