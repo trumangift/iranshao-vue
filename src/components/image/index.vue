@@ -3,7 +3,7 @@
     <image 
         @load="loaded = true"
         @error="loaded = false"
-        :class="className"
+        :class="[className, 'default-image']"
         :style="customStyle"
         @click="click"
         :src="url"
@@ -13,7 +13,7 @@
     <image 
         v-if="!loaded"
         :src="defaultLoadingImg"
-        :class="[className, 'defaultLoadingImg']"
+        :class="[className, 'default-image','defaultLoadingImg']"
         :style="customStyle"
         :mode="mode"
         >

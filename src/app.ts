@@ -20,6 +20,7 @@ const App = new Vue({
         left: document.documentElement.clientWidth
       });
       store.dispatch('app/SET_SYSTEM_INFO', {
+        screenWidth: document.documentElement.clientWidth,
         screenHeight: document.documentElement.clientHeight,
         statusBarHeight: 20,
       });
