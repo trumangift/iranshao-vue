@@ -1,8 +1,16 @@
 .competition-link {
-   padding: 20px; 
+   padding: 20px 20px 0 20px; 
    background-color: #f6f6f6;
    border-radius: 6px;
    height: 241px;
+   .watcher-container {
+       flex: 1;
+       .watcher {
+           color: #313131;
+           font-size: 20px;
+           padding-left: 10px;
+       }
+   }
    .avatar {
        width: 160px;
        height: 160px;;
@@ -10,7 +18,9 @@
    .text-container {
        padding-left: 32px;
        width: calc(100% - 160px);
+       height: 160px;
        box-sizing: border-box;
+       line-height: 43px;
        .title {
            color: #292929;
            font-size: 32px;
@@ -30,10 +40,17 @@
        .sub-text {
            color: #313131;
            font-size: 24px;
+           overflow: hidden;
+           text-overflow: ellipsis;
+           white-space: nowrap;
+           display: block;
        }
        .sub-date-text {
            color: #4E4E4E;
            font-size: 24px;
+           overflow: hidden;
+           text-overflow: ellipsis;
+           white-space: nowrap;
        }
    }
 }

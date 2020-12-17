@@ -23,8 +23,8 @@
                 </iran-image>    
             </view>
             <manifesto v-if="action === 'create_participation'" :text="bodyCopy" participationId={referable_id}></manifesto>
-            <gallery v-if="item.photos.length > 0 && !['create_article', 'create_diary'].includes(action)" :photos="item.photos || []"></gallery>
-            <competition-link :data="item.payload"></competition-link>
+            <gallery :photos="item.photos || []" :size="3"></gallery>
+            <competition-layout-one :data="item"></competition-layout-one>
         </view>    
     </view>      
 </template>
@@ -36,7 +36,7 @@ import ArticleText from '../article-text';
 import IranImage from '@/components/image/index.vue';
 import Manifesto from '@/pageComponents/manifesto';
 import gallery from '@/pageComponents/gallery';
-import competitionLink from '@/pageComponents/competition-link';
+import CompetitionLayoutOne from '@/pageComponents/competition-link/layout-two';
 import './index.scss';
 export default {
     created() {
@@ -122,7 +122,7 @@ export default {
         IranImage,
         Manifesto,
         gallery,
-        competitionLink
+        CompetitionLayoutOne
     }
 }
 </script>
