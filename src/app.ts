@@ -1,9 +1,10 @@
 import Vue from 'vue'
 import Taro from '@tarojs/taro'
 import store from './vuex/store';
+import  plugins from './global-component';
 import './style';
 import './app.scss'
-
+Vue.use(plugins);
 const App = new Vue({
   store,
   mounted () {

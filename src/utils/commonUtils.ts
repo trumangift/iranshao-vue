@@ -1,3 +1,18 @@
+// 获取url后面的code
+export const getUrlCode = () => {
+    const search = location.search;
+    if (search) {
+      const searchs = search.split('&');
+      const codeStr = searchs.find(d => search.indexOf('code=') >= 0);
+      if (codeStr) {
+        let index = codeStr.lastIndexOf('code=') + 5;
+        return  codeStr.substr(index);
+      }
+    }
+    return '';
+}
+
+
 // 将 格式为hh:mm:ss格式的时间 转换成 秒
 export const timeToSecond = (time) => {
   const hour = time.split(':')[0]

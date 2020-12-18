@@ -1,4 +1,5 @@
-import { SET_SYSTEM_INFO, SET_BOUNDING_RECT } from '../mutation-types';
+import { SET_SYSTEM_INFO, SET_BOUNDING_RECT, USER_SIGN_IN } from '../mutation-types';
+import { callApi } from "@/utils";
 export default {
     namespaced: true,
     state: {
@@ -26,6 +27,15 @@ export default {
       },
       [SET_BOUNDING_RECT]({commit}, boundingRect) {
         commit(SET_BOUNDING_RECT, boundingRect);
+      },
+      // 签到
+      userSignIn({commit}, signIn) {
+        try{
+        const res =  callApi('createCheckin')
+        return res;
+        } catch(e) {
+          console.log(e);
+        }
       }
     }
 };

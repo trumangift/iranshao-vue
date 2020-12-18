@@ -58,7 +58,6 @@ export default {
     },
     methods: {
         linkToDetail(){
-            debugger;
             Taro.navigateTo({ url: `/pages/utopicSquare/utopicDetail/index?utopicId=${this.topicMsg.id}` })
         }
     }

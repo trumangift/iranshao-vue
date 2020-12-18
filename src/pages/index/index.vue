@@ -1,7 +1,7 @@
 <template>
   <view>
     <view class="index_header container" :style="headerStyle">
-      <view  class="nosign">签到</view>
+      <view  class="nosign" @tap="signIn">签到</view>
       <view class="searchBox">
         <AtIcon class="icon-search" value='search' size='18' color='#BEBEBE'></AtIcon>
         <view class="searchPlaceholder">搜索</view>
@@ -12,6 +12,7 @@
         :current="current"
         :tabList="tabList"
         :onClick="handleClick"
+        :swipeable="false"
       >
         <AtTabsPane :current="current" :index="0">
           <view class='tab-content'>
@@ -30,7 +31,7 @@
 // 按需引入, 更小的应用体积
 import { AtIcon, AtTabs, AtTabsPane } from 'taro-ui-vue'
 import recommend from '../components/recommend';
-import { mapState } from "vuex";
+import { mapState,mapActions } from "vuex";
 import "taro-ui-vue/dist/style/components/icon.scss"
 import "taro-ui-vue/dist/style/components/tabs.scss"
 import './index.scss'
@@ -60,8 +61,12 @@ export default {
     }
   },
   methods: {
+    ...mapActions('app',['userSignIn']),
     handleClick(value) {
       this.current = value;
+    },
+    signIn() {;
+      this.userSignIn();
     }
   },
 }

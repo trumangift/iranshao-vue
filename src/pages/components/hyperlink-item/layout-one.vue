@@ -3,27 +3,21 @@
   <view class="competition-link column">
      <view class="row">
         <view class="avatar">
-            <iran-image  :url="data.cover || data.cover_url"></iran-image>
+            <iran-image  :url="url"></iran-image>
         </view>   
         <view class="text-container column">
-            <view>
-              <text  class="title">我我哦我我哦我我哦我我哦我我哦我我哦我我哦我我哦</text>
-            </view> 
+            <iran-text :text="title" :ellipsis="true" className="title"></iran-text>
             <view class="rate row cross-center">
-                <AtRate :value="5" :max="5" :size="9" /> 
-                <text class="rate-txt">5.0</text>
+                <AtRate :value="rate" :max="5" :size="9" /> 
+                <text class="rate-txt">{{rate}}</text>
             </view>
-            <view>
-              <text class="sub-text">青岛市五四广场</text>
-            </view>
-            <view>
-                <text class="sub-text">2019.05.04</text>
-            </view>
+            <iran-text :text="location" :ellipsis="true" className="sub-text"></iran-text>
+            <iran-text :text="date" :ellipsis="true" className="sub-date-text"></iran-text>
         </view>
      </view>
      <view class="watcher-container row cross-center">
         <AtIcon  prefixClass='fa' value='iconsFocus_on' size='12' color='red'></AtIcon>
-        <view><text class="watcher row">1.5万人关注</text></view>
+        <view><text class="watcher row">{{count}}万人关注</text></view>
      </view>  
   </view>
 </template>
@@ -35,7 +29,12 @@ import { AtRate, AtIcon } from 'taro-ui-vue'
 import "taro-ui-vue/dist/style/components/rate.scss";
 export default {
   props: {
-     data: {}
+     url: '',
+     title: '',
+     rate: '',
+     count: '',
+     location: '',
+     date: ''
   },
   data () {
     return {

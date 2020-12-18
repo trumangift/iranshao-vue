@@ -1,2 +1,3 @@
 export const SET_SYSTEM_INFO = 'SET_SYSTEM_INFO';
 export const SET_BOUNDING_RECT = 'SET_BOUNDING_RECT';
+export const USER_SIGN_IN = 'USER_SIGN_IN';

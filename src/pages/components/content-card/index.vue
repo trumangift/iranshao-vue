@@ -24,7 +24,38 @@
             </view>
             <manifesto v-if="action === 'create_participation'" :text="bodyCopy" participationId={referable_id}></manifesto>
             <gallery :photos="item.photos || []" :size="3"></gallery>
-            <competition-layout-one :data="item"></competition-layout-one>
+            <hyperlink-item 
+             v-if="item.payloads && item.payloads.length <= 1 && item.payload && item.payload.type === 'race'"
+             :url="item.payload.cover || item.payload.cover_url"
+             :title="item.payload.title || item.payload.name"
+             :rate="Number(item.payload.avg_score)"
+             :count="item.payload.bundled_race ? (item.payload.bundled_race.follows_count || 0) : (item.payload.follows_count || 0)"
+             :location="item.payload.location"
+             :date="item.payload.start_date"
+             ></hyperlink-item>
+
+             <hyperlink-item-gear
+                    v-if="item.payloads && item.payloads.length <= 1 && item.payload && item.payload.type === 'gear'"
+                    :url="item.payload.cover"
+                    :title="item.payload.title || item.payload.name"
+                    :rate="Number(item.payload.avg_score)"
+                    :count="item.payload.likes_count || 0"
+                    icon_text="人点赞"
+             ></hyperlink-item-gear>
+            <carousel v-if="item.payloads && item.payloads.length > 1" :data="item.payloads">
+                <template v-slot:content>
+                    <view class="item" :key="index" v-for="(item, index) in item.payloads">
+                        <hyperlink-item-gear
+                            v-if="item.type === 'gear' || item.type === 'race'"
+                            :url="item.cover"
+                            :title="item.title || item.name"
+                            :rate="Number(item.avg_score)"
+                            :count="item.likes_count || 0"
+                            icon_text="人点赞"
+                        ></hyperlink-item-gear>
+                    </view>
+                </template> 
+            </carousel>    
         </view>    
     </view>      
 </template>
@@ -36,7 +67,9 @@ import ArticleText from '../article-text';
 import IranImage from '@/components/image/index.vue';
 import Manifesto from '@/pageComponents/manifesto';
 import gallery from '@/pageComponents/gallery';
-import CompetitionLayoutOne from '@/pageComponents/competition-link/layout-two';
+import HyperlinkItem from '@/pageComponents/hyperlink-item/layout-one';
+import HyperlinkItemGear from '@/pageComponents/hyperlink-item/layout-two';
+import carousel from '@/components/carousel/index.vue';
 import './index.scss';
 export default {
     created() {
@@ -122,7 +155,9 @@ export default {
         IranImage,
         Manifesto,
         gallery,
-        CompetitionLayoutOne
+        HyperlinkItem,
+        HyperlinkItemGear,
+        carousel
     }
 }
 </script>

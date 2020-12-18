@@ -2,7 +2,7 @@
     <view class='article-text-container'>
       <view class='article-body' @tap='linkToArticleDetail'>
         <text class='h1-body'>{{h1Body}}</text>
-        <view class='body-text'>
+        <view class='body-text' v-if="bodyText!== '...'">
           {{bodyText}} <text class='full-text' @tap="linkToArticleDetail">全文</text>
         </view>
       </view>
