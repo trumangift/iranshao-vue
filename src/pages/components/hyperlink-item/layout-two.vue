@@ -1,20 +1,22 @@
 <!--  -->
 <template>
-  <view class="competition-link column layout-two main-center">
+  <view class="competition-link column main-center">
      <view class="row">
         <view class="avatar">
             <iran-image  :url="url"></iran-image>
         </view>   
-        <view class="text-container column">
-            <iran-text :text="title" :ellipsis="true" className="title"></iran-text>
-            <view class="rate row cross-center" style="margin-top: 5px;">
-                <AtRate :value="rate" :max="5" :size="9" /> 
-                <text class="rate-txt">{{rate}}</text>
-            </view>
-            <view class="watcher-container row cross-center">
-              <AtIcon  prefixClass='fa' value='iconsFocus_on' size='12' color='red'></AtIcon>
-              <view><text class="watcher row">{{count}}{{icon_text}}</text></view>
-          </view>  
+        <view class="text-container column space-between">
+              <view class="main-text column space-between">
+                <iran-text :text="title" :ellipsis="true" className="title"></iran-text>
+                <view class="rate row cross-center">
+                    <AtRate :value="rate" :max="5" :size="16" /> 
+                    <text class="rate-txt">{{rate}}</text>
+                </view>
+              </view>
+              <view class="watcher-container row cross-end">
+                <AtIcon  prefixClass='fa' value='iconsFocus_on' size='12' color='red'></AtIcon>
+                <view class="watcher">{{count}}{{icon_text}}</view>
+              </view>  
         </view>
      </view>
   </view>

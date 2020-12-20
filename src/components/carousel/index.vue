@@ -41,10 +41,10 @@ export default {
   overflow: hidden;
   white-space:nowrap;
   width: 100%;
-  height: 190px;
+  min-height: 190px;
   .item {
     display: inline-block;
-    width: 70vw;
+    width: 80vw;
     margin-right: 20px;
   }
 }

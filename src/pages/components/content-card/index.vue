@@ -19,11 +19,11 @@
             ></article-text>
 
             <view v-if="action === 'create_article' || action === 'create_diary'" class="photo-container">
-                <iran-image :url="item.photo_url" mode="aspectFill" className="cover-image">
+                <iran-image :url="item.photo_url" mode="aspectFit" className="cover-image">
                 </iran-image>    
             </view>
             <manifesto v-if="action === 'create_participation'" :text="bodyCopy" participationId={referable_id}></manifesto>
-            <gallery :photos="item.photos || []" :size="3"></gallery>
+            <gallery :photos="item.photos || []" :size="3"  v-if="!['create_article', 'create_diary'].includes(action)" ></gallery>
             <hyperlink-item 
              v-if="item.payloads && item.payloads.length <= 1 && item.payload && item.payload.type === 'race'"
              :url="item.payload.cover || item.payload.cover_url"
@@ -51,11 +51,28 @@
                             :title="item.title || item.name"
                             :rate="Number(item.avg_score)"
                             :count="item.likes_count || 0"
-                            icon_text="人点赞"
+                            :icon_text="item.type === 'race' ? '人关注' : '人点赞'"
                         ></hyperlink-item-gear>
                     </view>
                 </template> 
-            </carousel>    
+            </carousel>  
+
+            <operation
+            :shareBgPic="item.photos.length > 1 ? item.photos[0] : ''"
+            :h1Body="h1Body"
+            :bodyCopy="bodyCopy"
+            :likesCount="item.likes_count"
+            :repliesCount="item.replies_count"
+            :sharesCount="item.shares_count"
+            :referableId="item.referable_id"
+            :referableType="item.referable_type"
+            :statusesId="item.id"
+            :action="item.action"
+            :likedByMe="item.liked_by_me"
+            :favoredByMe="item.favored_by_me"
+            :postedByCurrentUser="item.posted_by_current_user"
+            >
+            </operation>  
         </view>    
     </view>      
 </template>
@@ -70,6 +87,7 @@ import gallery from '@/pageComponents/gallery';
 import HyperlinkItem from '@/pageComponents/hyperlink-item/layout-one';
 import HyperlinkItemGear from '@/pageComponents/hyperlink-item/layout-two';
 import carousel from '@/components/carousel/index.vue';
+import operation from '@/pageComponents/operation'
 import './index.scss';
 export default {
     created() {
@@ -157,7 +175,8 @@ export default {
         gallery,
         HyperlinkItem,
         HyperlinkItemGear,
-        carousel
+        carousel,
+        operation
     }
 }
 </script>

@@ -1,9 +1,7 @@
 <!-- 全局文本组件，默认不需要省略号 -->
 <template>
-  <view>
-      <text :class="['default-text', ellipsis ? 'ellipsis' : '', className || '']">
-          {{text}}
-      </text>
+  <view :class="['default-text', ellipsis ? 'ellipsis' : '', className || '']">
+     {{text}}
   </view>
 </template>
 

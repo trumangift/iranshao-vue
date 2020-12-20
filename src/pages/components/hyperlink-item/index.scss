@@ -1,19 +1,16 @@
 .competition-link {
-   margin: 20px 0; 
-   padding: 20px 20px 0 20px; 
-   background-color: #f6f6f6;
    border-radius: 6px;
-   height: 241px;
-   &.layout-two {
-       height: 200px;
-       padding: 0 20px;
-   }
+   padding: 20px;
+   background-color: #f6f6f6;
    .watcher-container {
        flex: 1;
        .watcher {
            color: #313131;
            font-size: 20px;
            padding-left: 10px;
+       }
+       &.one {
+           margin-top: 20px;
        }
    }
    .avatar {
@@ -23,15 +20,17 @@
    .text-container {
        padding-left: 32px;
        width: calc(100% - 160px);
-       height: 160px;
        box-sizing: border-box;
-       line-height: 43px;
+       .main-text  {
+            flex: 1.5;
+        }
        .title {
            color: #292929;
            font-size: 32px;
            font-weight: 600;
        }
        .rate {
+    
            .rate-txt {
                font-size: 24px;
                color: #313131;

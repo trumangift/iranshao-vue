@@ -12,7 +12,15 @@ export const getUrlCode = () => {
     return '';
 }
 
-
+export const isWeChat = () => {
+      var ua = navigator.userAgent.toLowerCase();
+      const matches = ua.match(/MicroMessenger/i);
+      if (matches && matches[0] == 'micromessenger') {
+        return true;
+      } else {
+        return false;
+      }
+}
 // 将 格式为hh:mm:ss格式的时间 转换成 秒
 export const timeToSecond = (time) => {
   const hour = time.split(':')[0]
